@@ -1,9 +1,11 @@
 const uploadContainer = document.querySelector('.upload-container')
 const imagePreview = document.querySelector('.upload-container img')
 const imageInput = document.querySelector('.upload-container input')
+const downloadBtn = document.querySelector('.download-button')
 const widthInput = document.getElementById('width')
 const heightInput = document.getElementById('height')
 const ratioCheck = document.getElementById('ratio')
+const qualityCheck = document.getElementById('quality')
 
 uploadContainer.addEventListener('click', () => imageInput.click())
 
@@ -36,3 +38,20 @@ heightInput.addEventListener('keyup', () => {
 })
 
 imageInput.addEventListener('change', loadImage)
+
+const customizeAndDownload = () => {
+	const canvas = document.createElement('canvas')
+	const downloadLink = document.createElement('a')
+	const ctx = canvas.getContext('2d')
+	const imgQuality = qualityCheck.checked ? 0.7 : 1.0
+
+	canvas.width = widthInput.value
+	canvas.height = heightInput.value
+	ctx.drawImage(imagePreview, 0, 0, canvas.width, canvas.height)
+
+	downloadLink.href = canvas.toDataURL('image/jpeg', imgQuality)
+	downloadLink.download = new Date().getTime()
+	downloadLink.click()
+}
+
+downloadBtn.addEventListener('click', customizeAndDownload)
