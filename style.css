@@ -37,9 +37,24 @@ body {
 	cursor: pointer;
 }
 
+.wrapper.active .upload-container {
+	border: none;
+}
+
+.wrapper.active .upload-container img {
+	width: 100%;
+	height: 100%;
+	object-fit: contain;
+	border-radius: 10px;
+}
+
 .wrapper .upload-container p {
 	font-size: 17px;
 	color: #373737;
+}
+
+.wrapper.active .upload-container p {
+	display: none;
 }
 
 .options-container {
